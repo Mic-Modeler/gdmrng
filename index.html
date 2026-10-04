@@ -105,7 +105,7 @@
       line-height: 1.5;
     }
 
-    .unlock-btn {
+    .action-btn {
       background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
       color: white;
       border: none;
@@ -121,13 +121,13 @@
       gap: 10px;
     }
 
-    .unlock-btn:hover {
+    .action-btn:hover {
       transform: translateY(-3deg) scale(1.04);
       box-shadow: 0 15px 30px rgba(255, 107, 107, 0.5);
     }
 
-    /* CARD INSIDE (UNLOCKED) */
-    .content-card {
+    /* GENERAL SLIDE CARD STYLES */
+    .slide-card {
       display: none;
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
@@ -136,7 +136,7 @@
       text-align: center;
       box-shadow: 0 25px 50px rgba(0,0,0,0.15);
       border: 1px solid rgba(255, 255, 255, 0.9);
-      animation: openCard 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      animation: openCard 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
     @keyframes openCard {
@@ -144,7 +144,7 @@
       100% { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-    /* Top Section with Image in Red Box Position */
+    /* Top Section with Image */
     .top-header {
       display: flex;
       justify-content: center;
@@ -189,9 +189,10 @@
 
     .greeting-text {
       color: #4a4a4a;
-      font-size: 0.98rem;
+      font-size: 1.1rem;
       line-height: 1.6;
       margin-bottom: 25px;
+      font-weight: 600;
     }
 
     .checklist {
@@ -199,7 +200,7 @@
       padding: 18px;
       border-radius: 20px;
       text-align: left;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       border: 1px solid #ffeaa7;
     }
 
@@ -250,32 +251,55 @@
   <div class="bg-element" style="left: 85%; animation-duration: 8s;">☀️</div>
 
   <div class="card-container">
+    
     <!-- ENVELOPE FRONT -->
     <div class="envelope-box wiggle" id="envelope">
       <div class="lock-badge">🔒 LOCKED WITH GOOD VIBES</div>
       <div class="envelope-icon">✉️</div>
       <h2 class="title">You've Got Mail!</h2>
       <p class="subtitle">Warning: Opening this card may cause unexpected smiling and high energy today. ☕✨</p>
-      <button class="unlock-btn" onclick="unlockCard()">
+      <button class="action-btn" onclick="unlockCard()">
         <span>🔑</span> Unlock the Good Mood!
       </button>
     </div>
 
-    <!-- INSIDE CARD (UNLOCKED) -->
-    <div class="content-card" id="card">
-      
+    <!-- SLIDE 1: JOKE QUESTION -->
+    <div class="slide-card" id="joke-question">
+      <div style="font-size: 60px; margin-bottom: 15px;">🤔🇰🇷</div>
+      <p class="greeting-text" style="font-size: 1.2rem; color: #2d3436; margin-bottom: 30px;">
+        Kapag pumunta kang Korea mag-rent ng apartment, anong tawag doon?<br><br><strong>hula?</strong>
+      </p>
+      <button class="action-btn" onclick="goToSlide('joke-answer')">
+        <span>🙋‍♀️</span> SIRIT
+      </button>
+    </div>
+
+    <!-- SLIDE 2: JOKE PUNCHLINE -->
+    <div class="slide-card" id="joke-answer">
+      <div style="font-size: 60px; margin-bottom: 15px;">😂🏢</div>
+      <h2 class="greeting-title" style="font-size: 2.2rem; margin-bottom: 20px;">
+        Edi "OPPA" hahahahahah
+      </h2>
+      <button class="action-btn" style="margin-top: 15px;" onclick="goToSlide('main-card')">
+        Next ➔
+      </button>
+    </div>
+
+    <!-- SLIDE 3: MAIN GOOD MORNING CARD -->
+    <div class="slide-card" id="main-card">
       <!-- TOP HEADER (PHOTO + SUN) -->
       <div class="top-header">
         <div class="photo-frame">
-          <!-- Direct match sa na-upload mong filename -->
           <img src="e376c777-4f46-497f-a640-cfc8db7722e2.jpg" alt="Jo">
         </div>
         <div class="sun-icon">☀️</div>
       </div>
 
       <h1 class="greeting-title">Hi Jo! 🌸</h1>
+      
+      <!-- PALITAN NG BAGONG GREETING TEXT -->
       <p class="greeting-text">
-        Good morning! Rise and shine! Just a friendly reminder that you are amazing. Don't forget to smile, take a deep breath, and have a wonderful day ahead! ☕💖
+        Good morning biii, good week ahead! hahahaha ☕💖
       </p>
 
       <div class="checklist">
@@ -285,14 +309,12 @@
         <label class="item"><input type="checkbox"> 😊 Smile and conquer the day!</label>
       </div>
 
-      <p style="font-size: 0.85rem; color: #b2bec3;">Made with ❤ for Jo</p>
     </div>
   </div>
 
   <script>
     function unlockCard() {
       const envelope = document.getElementById('envelope');
-      const card = document.getElementById('card');
 
       for(let i = 0; i < 20; i++) {
         createSparkle();
@@ -303,14 +325,30 @@
 
       setTimeout(() => {
         envelope.style.display = 'none';
-        card.style.display = 'block';
+        document.getElementById('joke-question').style.display = 'block';
       }, 400);
+    }
+
+    function goToSlide(slideId) {
+      for(let i = 0; i < 15; i++) {
+        createSparkle();
+      }
+
+      const activeSlide = document.querySelector('.slide-card[style*="display: block"]');
+      if (activeSlide) {
+        activeSlide.style.display = 'none';
+      }
+
+      const nextSlide = document.getElementById(slideId);
+      if (nextSlide) {
+        nextSlide.style.display = 'block';
+      }
     }
 
     function createSparkle() {
       const sparkle = document.createElement('div');
       sparkle.classList.add('sparkle');
-      sparkle.innerText = ['✨', '🌟', '💖', '🌸', '🎉', '☕'][Math.floor(Math.random() * 6)];
+      sparkle.innerText = ['✨', '🌟', '💖', '🌸', '🎉', '☕', '😂'][Math.floor(Math.random() * 7)];
       
       const container = document.querySelector('.card-container');
       sparkle.style.left = (Math.random() * 80 + 10) + '%';
