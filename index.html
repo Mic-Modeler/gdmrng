@@ -46,7 +46,7 @@
       perspective: 1000px;
     }
 
-    /* REAL ENVELOPE DESIGN WITH FLAP ANIMATION */
+    /* ENVELOPE WRAPPER STYLES */
     .envelope-wrapper {
       position: relative;
       width: 100%;
@@ -74,58 +74,91 @@
       80% { transform: rotate(1deg); }
     }
 
-    /* 3D Envelope Flap */
+    /* FULL DETAILED ENVELOPE DESIGN */
     .envelope-visual {
       position: relative;
-      width: 140px;
-      height: 90px;
+      width: 180px;
+      height: 120px;
       margin: 0 auto 20px auto;
-      background: #ffb8c6;
-      border-radius: 0 0 12px 12px;
-      box-shadow: 0 8px 20px rgba(238, 156, 167, 0.4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background: #ff758f;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(255, 117, 143, 0.4);
+      perspective: 800px;
+      overflow: visible;
     }
 
-    .envelope-flap {
+    /* Side and Bottom Pocket Flaps */
+    .envelope-visual::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 90px solid #ff5277;
+      border-right: 90px solid #ff5277;
+      border-top: 65px solid transparent;
+      border-radius: 0 0 12px 12px;
+      z-index: 3;
+    }
+
+    .envelope-visual::after {
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 0;
       height: 0;
-      border-left: 70px solid transparent;
-      border-right: 70px solid transparent;
-      border-top: 55px solid #ff91a4;
-      transform-origin: top;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 3;
+      border-top: 60px solid transparent;
+      border-bottom: 60px solid transparent;
+      border-left: 90px solid #ff6384;
+      border-radius: 12px 0 0 12px;
+      z-index: 2;
     }
 
+    /* Interactive Top Flap */
+    .envelope-top-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 90px solid transparent;
+      border-right: 90px solid transparent;
+      border-top: 70px solid #ff8fa3;
+      transform-origin: top;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 5;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));
+    }
+
+    /* Inner Letter Preview */
     .envelope-letter-preview {
       position: absolute;
-      width: 120px;
-      height: 70px;
+      width: 155px;
+      height: 90px;
       background: #ffffff;
       border-radius: 8px;
-      top: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.6s ease-in-out;
+      top: 15px;
+      left: 12.5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 28px;
+      border: 1px dashed #ffb3c1;
     }
 
-    /* Opening Sequence Animation States */
-    .envelope-wrapper.open .envelope-flap {
+    /* Envelope Opening Animation States */
+    .envelope-wrapper.open .envelope-top-flap {
       transform: rotateX(180deg);
       z-index: 0;
     }
 
     .envelope-wrapper.open .envelope-letter-preview {
-      transform: translateY(-45px);
+      transform: translateY(-55px);
     }
 
     .lock-badge {
@@ -162,7 +195,7 @@
       background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
       color: white;
       border: none;
-      padding: 15px 32px;
+      padding: 15px 25px;
       font-size: 1.05rem;
       font-weight: 700;
       border-radius: 50px;
@@ -177,7 +210,7 @@
     }
 
     .action-btn:hover {
-      transform: translateY(-3deg) scale(1.04);
+      transform: translateY(-3deg) scale(1.03);
       box-shadow: 0 15px 30px rgba(255, 107, 107, 0.5);
     }
 
@@ -291,12 +324,12 @@
 
   <div class="card-container">
     
-    <!-- ENVELOPE FRONT WITH FLAP ANIMATION -->
+    <!-- ENVELOPE FRONT WITH FULL GRAPHIC & FLAP ANIMATION -->
     <div class="envelope-wrapper wiggle" id="envelope">
       <div class="lock-badge">🔒 Unlock me</div>
       
       <div class="envelope-visual">
-        <div class="envelope-flap"></div>
+        <div class="envelope-top-flap"></div>
         <div class="envelope-letter-preview">💌</div>
       </div>
 
@@ -321,11 +354,11 @@
     <!-- SLIDE 2: JOKE PUNCHLINE -->
     <div class="slide-card" id="joke-answer">
       <div style="font-size: 60px; margin-bottom: 15px;">😂🏢</div>
-      <h2 class="greeting-title" style="font-size: 2.2rem; margin-bottom: 20px;">
+      <h2 class="greeting-title" style="font-size: 2.2rem; margin-bottom: 25px;">
         Edi "OPPA" hahahahahah
       </h2>
-      <button class="action-btn" style="margin-top: 15px;" onclick="goToSlide('main-card')">
-        Next ➔
+      <button class="action-btn" style="margin-top: 10px;" onclick="goToSlide('main-card')">
+        click mo na lang ako ulit last promiseeee!
       </button>
     </div>
 
