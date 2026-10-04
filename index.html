@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Good Morning! ☀️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #a1c4fd 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+      padding: 20px;
+    }
+
+    /* Container Box */
+    .card-container {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      perspective: 1000px;
+    }
+
+    /* ENVELOPE STYLES */
+    .envelope-box {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      padding: 30px 20px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      transition: all 0.5s ease;
+    }
+
+    /* Witty Jiggle / Wiggle Animation */
+    .wiggle {
+      animation: playfulWiggle 2s infinite ease-in-out;
+    }
+
+    @keyframes playfulWiggle {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      15% { transform: rotate(-6deg) scale(1.03); }
+      30% { transform: rotate(5deg) scale(1.03); }
+      45% { transform: rotate(-3deg); }
+      60% { transform: rotate(2deg); }
+      75% { transform: rotate(0deg); }
+    }
+
+    .envelope-icon {
+      font-size: 80px;
+      margin-bottom: 10px;
+      display: inline-block;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+    }
+
+    .lock-badge {
+      display: inline-block;
+      background: #ff4757;
+      color: white;
+      font-size: 0.85rem;
+      font-weight: bold;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+    }
+
+    h2.title {
+      color: #2f3542;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    p.subtitle {
+      color: #57606f;
+      font-size: 0.95rem;
+      margin-bottom: 25px;
+      line-height: 1.4;
+    }
+
+    .unlock-btn {
+      background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .unlock-btn:hover {
+      transform: translateY(-3deg) scale(1.05);
+      box-shadow: 0 15px 25px rgba(255, 107, 107, 0.5);
+    }
+
+    .unlock-btn:active {
+      transform: translateY(1deg) scale(0.98);
+    }
+
+    /* CARD INSIDE (NAKATAGO MUNA) */
+    .content-card {
+      display: none;
+      background: #ffffff;
+      padding: 35px 25px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      animation: openCard 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes openCard {
+      0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    .sun-icon {
+      font-size: 70px;
+      animation: spinSun 12s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spinSun {
+      100% { transform: rotate(360deg); }
+    }
+
+    .greeting-title {
+      color: #ff6b6b;
+      font-size: 2rem;
+      margin: 15px 0 10px;
+    }
+
+    .greeting-text {
+      color: #4b4b4b;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .checklist {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .checklist h4 {
+      color: #2f3542;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      color: #57606f;
+      cursor: pointer;
+    }
+
+    .item input {
+      accent-color: #ff6b6b;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    /* Floating particles effect */
+    .sparkle {
+      position: absolute;
+      pointer-events: none;
+      animation: floatUp 1.5s ease-out forwards;
+      font-size: 20px;
+    }
+
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-100px) scale(1.5); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-container">
+    <!-- ENVELOPE FRONT -->
+    <div class="envelope-box wiggle" id="envelope">
+      <div class="lock-badge">🔒 LOCKED WITH GOOD VIBES</div>
+      <div class="envelope-icon">✉️</div>
+      <h2 class="title">You've Got Mail!</h2>
+      <p class="subtitle">Warning: Opening this card may cause unexpected smiling and high energy today. ☕✨</p>
+      <button class="unlock-btn" onclick="unlockCard()">
+        <span>🔑</span> Unlock the Good Mood!
+      </button>
+    </div>
+
+    <!-- INSIDE CARD (UNLOCKED) -->
+    <div class="content-card" id="card">
+      <div class="sun-icon">☀️</div>
+      <h1 class="greeting-title">Good Morning! 🌸</h1>
+      <p class="greeting-text">
+        Rise and shine! Just a friendly reminder that you are capable of amazing things today. Don't forget to smile and take things one step at a time! 💖
+      </p>
+
+      <div class="checklist">
+        <h4>Morning Quick Checklist:</h4>
+        <label class="item"><input type="checkbox"> ☕ Drink water / coffee</label>
+        <label class="item"><input type="checkbox"> 🍳 Eat breakfast</label>
+        <label class="item"><input type="checkbox"> 😊 Smile at yourself</label>
+      </div>
+
+      <p style="font-size: 0.85rem; color: #a4b0be;">Have a wonderful day ahead! 🚀</p>
+    </div>
+  </div>
+
+  <script>
+    function unlockCard() {
+      const envelope = document.getElementById('envelope');
+      const card = document.getElementById('card');
+
+      // Sparkle particle effect sa click
+      for(let i = 0; i < 15; i++) {
+        createSparkle();
+      }
+
+      // Hide Envelope then Show Card
+      envelope.style.transform = 'scale(0.8)';
+      envelope.style.opacity = '0';
+
+      setTimeout(() => {
+        envelope.style.display = 'none';
+        card.style.display = 'block';
+      }, 400);
+    }
+
+    function createSparkle() {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.innerText = ['✨', '🌟', '💖', '☀️️', '🎉'][Math.floor(Math.random() * 5)];
+      
+      const container = document.querySelector('.card-container');
+      sparkle.style.left = (Math.random() * 80 + 10) + '%';
+      sparkle.style.top = (Math.random() * 50 + 20) + '%';
+      
+      container.appendChild(sparkle);
+
+      setTimeout(() => {
+        sparkle.remove();
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
